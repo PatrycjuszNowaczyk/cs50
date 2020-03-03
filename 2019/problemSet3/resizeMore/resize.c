@@ -25,6 +25,11 @@ int main(int argc, char *argv[])
     char *infile = argv[2];
     char *outfile = argv[3];
     float nTimes = atof(argv[1]);
+    // set nTimes for scaling down
+    if(nTimes < 1)
+    {
+        nTimes = 1;
+    }
 
     // open input file
     FILE *inptr = fopen(infile, "r");
