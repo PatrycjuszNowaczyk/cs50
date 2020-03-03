@@ -67,14 +67,14 @@ int main(int argc, char *argv[])
     int outHeight = (roundf(inHeight * nTimes));
     int outWidth = (roundf(inWidth * nTimes));
     float nTimesDecimal = nTimes - (int) nTimes;
-    float nthPixel = inWidth * (inWidth * nTimesDecimal);
+    float nthPixel = inWidth / round((inWidth * nTimesDecimal));
     float nthPixelInit = nthPixel;
-    float nthScanline = inHeight * (inHeight * nTimesDecimal);
+    float nthScanline = inHeight / round((inHeight * nTimesDecimal));
     float nthScanlineInit = nthScanline;
     int pixelsToCopy = roundf(inWidth * nTimesDecimal);
     int scanlinesToCopy = roundf(inHeight * nTimesDecimal);
     int countPixels = 0;
-    int countScanlines = 0 ;
+    int countScanlines = 0;
 
     // determine padding for scanlines of input and output file
     int paddingI = (4 - (inWidth * sizeof(RGBTRIPLE)) % 4) % 4;
@@ -86,16 +86,6 @@ int main(int argc, char *argv[])
     bf.bfSize = (bi.biWidth * sizeof(RGBTRIPLE) + paddingO) * abs(bi.biHeight) + bf.bfOffBits;
     bi.biSizeImage = bf.bfSize - bf.bfOffBits;
 
-    printf("pixels to copy: %i\n", pixelsToCopy);
-    printf("%f\n", nTimesDecimal);
-    printf("foundf(nth pixel): %i\n", (int) roundf(nthPixel));
-    printf("nth scanline: %f\n", nthScanline);
-    printf("%i\n", paddingI);
-    printf("%i\n", paddingO);
-    printf("%i\n", inHeight);
-    printf("%i\n", inWidth);
-    printf("%i\n", bi.biWidth);
-    printf("%i\n", bi.biHeight);
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
 
@@ -108,12 +98,12 @@ int main(int argc, char *argv[])
         // multiplicate scanlines n Times
         for(int i2 = 1; i2 <= (int) nTimes; i2++)
         {   
-            printf("nthscanline: %i\n", i2);
+            printf("nthscanline to copy: %i\n", i1);
             // check what scanline to extra copy
             if( roundf(nthScanline) == i1 && countScanlines < scanlinesToCopy)
             {
                 i2--;
-            printf("nthscanline to copy: %i\n", i2);
+            printf("nthscanline to extra copy: %i\n", i1);
                 countScanlines++;
                 nthScanline += nthScanlineInit;
             }
