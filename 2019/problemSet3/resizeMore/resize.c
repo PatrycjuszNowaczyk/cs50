@@ -25,11 +25,6 @@ int main(int argc, char *argv[])
     char *infile = argv[2];
     char *outfile = argv[3];
     float nTimes = atof(argv[1]);
-    // set nTimes for scaling down
-    if(nTimes < 1)
-    {
-        nTimes = 1;
-    }
 
     // open input file
     FILE *inptr = fopen(infile, "r");
@@ -75,11 +70,19 @@ int main(int argc, char *argv[])
     float nthPixel = inWidth / round((inWidth * nTimesDecimal));
     float nthPixelInit = nthPixel;
     float nthScanline = inHeight / round((inHeight * nTimesDecimal));
-    float nthScanlineInit = nthScanline;
+    float nthScanlineInit = nthPixel;
     int pixelsToCopy = roundf(inWidth * nTimesDecimal);
     int scanlinesToCopy = roundf(inHeight * nTimesDecimal);
     int countPixels = 0;
     int countScanlines = 0;
+    int scaleDown = 0;
+    printf("Pixels to copy: %i\n", pixelsToCopy);
+    // set nTimes for scaling down
+    if(nTimes < 1)
+    {   
+        scaleDown = 1;
+        nTimes = 1;
+    }
 
     // determine padding for scanlines of input and output file
     int paddingI = (4 - (inWidth * sizeof(RGBTRIPLE)) % 4) % 4;
@@ -105,7 +108,7 @@ int main(int argc, char *argv[])
         {   
             printf("nthscanline to copy: %i\n", i1);
             // check what scanline to extra copy
-            if( roundf(nthScanline) == i1 && countScanlines < scanlinesToCopy)
+            if( roundf(nthScanline) == i1 && countScanlines < scanlinesToCopy && scaleDown == 0)
             {
                 i2--;
             printf("nthscanline to extra copy: %i\n", i1);
@@ -121,21 +124,29 @@ int main(int argc, char *argv[])
 
                 // read RGB triple from infile
                 fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-                // write RGB triple to outfile
-                for (int k = 1; k <= (int) nTimes; k++)
+                if (scaleDown == 0)
                 {
-                    // check what pixel to extra copy
-                    if(roundf(nthPixel) == j && countPixels < pixelsToCopy)
+                    // write RGB triple to outfile
+                    for (int k = 1; k <= (int) nTimes; k++)
                     {
-                        printf("extrapixel\n");
-                        printf("%f\n", roundf(nthPixel));
-                        fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-                        countPixels++;
-                        nthPixel += nthPixelInit;
-                        printf("%f\n", roundf(nthPixel));
-                    }
+                        // check what pixel to extra copy
+                        if(roundf(nthPixel) == j && countPixels < pixelsToCopy)
+                        {
+                            printf("extrapixel\n");
+                            printf("%f\n", roundf(nthPixel));
+                            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                            countPixels++;
+                            nthPixel += nthPixelInit;
+                        }
 
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                        fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                    }
+                }
+                else if(roundf(nthPixel) == j && roundf(nthScanline) == i1 && countPixels < pixelsToCopy)
+                {
+                    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                    nthPixel += nthPixelInit;
+                    countPixels++;
                 }
             }
             nthPixel = nthPixelInit;
@@ -153,10 +164,26 @@ int main(int argc, char *argv[])
             }
 
             // add padding to outfile
-            for (int l = 0; l < paddingO; l++)
+            if (scaleDown == 0)
             {
-                fputc(0x00, outptr);
+                for (int l = 0; l < paddingO; l++)
+                {
+                    fputc(0x00, outptr);
+                }
             }
+            else if (roundf(nthScanline) == i1 && scaleDown == 1)
+            {
+                for (int l = 0; l < paddingO; l++)
+                {
+                    fputc(0x00, outptr);
+                }
+            }
+            
+            
+        }
+        if (roundf(nthScanline) == i1 && scaleDown == 1)
+        {
+            nthScanline += nthScanlineInit;
         }
 
     }
