@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     int countPixels = 0;
     int countScanlines = 0;
     int scaleDown = 0;
-    printf("Pixels to copy: %i\n", pixelsToCopy);
+    
     // set nTimes for scaling down
     if(nTimes < 1)
     {   
@@ -106,12 +106,10 @@ int main(int argc, char *argv[])
         // multiplicate scanlines n Times
         for(int i2 = 1; i2 <= (int) nTimes; i2++)
         {   
-            printf("nthscanline to copy: %i\n", i1);
             // check what scanline to extra copy
             if( roundf(nthScanline) == i1 && countScanlines < scanlinesToCopy && scaleDown == 0)
             {
                 i2--;
-            printf("nthscanline to extra copy: %i\n", i1);
                 countScanlines++;
                 nthScanline += nthScanlineInit;
             }
@@ -132,8 +130,6 @@ int main(int argc, char *argv[])
                         // check what pixel to extra copy
                         if(roundf(nthPixel) == j && countPixels < pixelsToCopy)
                         {
-                            printf("extrapixel\n");
-                            printf("%f\n", roundf(nthPixel));
                             fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
                             countPixels++;
                             nthPixel += nthPixelInit;
@@ -153,7 +149,6 @@ int main(int argc, char *argv[])
             countPixels = 0;
             if(i2 < (int) nTimes)
             {
-                printf("enter\n");
             // return to beggining of scanline
             fseek(inptr, inWidth * sizeof(RGBTRIPLE) * -1, SEEK_CUR);
             }
@@ -178,16 +173,12 @@ int main(int argc, char *argv[])
                     fputc(0x00, outptr);
                 }
             }
-            
-            
         }
         if (roundf(nthScanline) == i1 && scaleDown == 1)
         {
             nthScanline += nthScanlineInit;
         }
-
     }
-
 
     // close infile
     fclose(inptr);
