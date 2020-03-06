@@ -4,3 +4,5 @@ recover.o
 test.o
 test
 images/
+.vscode
+images.zip

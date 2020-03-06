@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <sys/stat.h> 
+#include <errno.h>
 
 typedef uint8_t BYTE;
 
 int main(int argc, char *argv[])
 {
 
-    printf("start\n");
     char *sourceFile = argv[1]; 
     char *pch;
 
@@ -37,13 +38,14 @@ int main(int argc, char *argv[])
         return 4;
     }
 
+    // create directory if doesn't exist
+    mkdir("images", 0777);
+
     // declare needed variables
     BYTE buffer[512];
-    memset(buffer,'\0',512);
     int imageNumber = 1;
     char intToString[10];
     char nameOfAfile[128];
-    bzero(nameOfAfile,128);
     char nameConcat1[] = {"./images/image-"};
     char nameConcat2[] = {".jpg"};
     BYTE isNewJpeg = 0;
@@ -54,7 +56,7 @@ int main(int argc, char *argv[])
     while (fread(buffer, 512,1,inPointer) == 1)
     {
 
-        // check is it a jpeg
+        // check is it start of a new jpeg
         if(buffer[0] == 255)
         {   
             isNewJpeg++;
@@ -82,11 +84,8 @@ int main(int argc, char *argv[])
         // create jpeg file if was found
         if (isNewJpeg == 4)
         {
-            sprintf(intToString, "%i", imageNumber);
-            strcpy(nameOfAfile, strcat(strcat(nameConcat1, intToString), nameConcat2));
-            // tutaj jest problem z tworzeniem pliku 
+            sprintf(nameOfAfile,"./images/image-%i.jpg",imageNumber);
             image = fopen(nameOfAfile, "w");
-            printf("create new file\n");
             if (image == NULL)
             {
                 fprintf(stderr, "Could not create %s.\n", nameOfAfile);
@@ -96,42 +95,48 @@ int main(int argc, char *argv[])
             imageNumber++;
             isNewJpeg = 0;
             isJpeg = 1;
-            bzero(nameOfAfile, 128);
-            bzero(nameConcat1, 15);
-            bzero(nameConcat2, 4);
-            bzero(intToString,10);
-            // nameOfAfile[0] = 0;
-            // nameConcat1[0] = 0;
-            // nameConcat2[0] = 0;
-            // intToString[0] = 0;
-            // memset(intToString,0,strlen(intToString));
-            // memset(nameOfAfile,0,strlen(nameOfAfile));
-            // memset(nameConcat1,0,strlen(nameConcat1));
-            // memset(nameConcat2,0,strlen(nameConcat2));
-            strcpy(nameConcat1,"./images/image-");
-            strcpy(nameConcat2,".jpg");
         }
         else if(isJpeg ==1)
         {
-            fwrite(buffer, 512, 1, image);
-        }
-
-        // check is it an end of a jpeg's file
-        if (buffer[0] && !buffer[511] && isJpeg == 1)
-        {
-            for (int i = 510; i > 0 ; i--)
+            // check is it an end of a jpeg's file
+            if (buffer[511] == 0 || (buffer[511] == 0xD9 && buffer[510] == 0xFF))
             {
-                if (buffer[i] != EOF)
+                // find last byte of a jpeg's file
+                for (int i = 511; i > 0 ; i--)
                 {
-                    printf("close file\n");
-                        isJpeg = 0;
-                        fclose(image);
+                    if (buffer[i] != 0)
+                    {
+                        // if found last two closing bytes write down and cloase a file
+                        if (buffer[i] == 0xD9 && buffer[i-1] == 0xFF)
+                        {
+                            fwrite(buffer, i+1, 1, image);
+                            printf("%s has been recovered\n", nameOfAfile);
+                            isJpeg = 0;
+                            fclose(image);
+                            break;
+                        }
+                        // if closing bytes not found just write down whole buffer to a file
+                        else
+                        {
+                            fwrite(buffer, 512, 1, image);
+                            break;
+                        }
+                    
+                    }
+                    
                 }
             }
+            // if there is no ending sign just write down buffer
+            else
+            {
+                fwrite(buffer, 512, 1, image);
+            }
+            
         }
 
-    }
 
+    }
+    printf("\nAll images are successfully restored.\n\n");
     fclose(inPointer);
     return 0;
 }
