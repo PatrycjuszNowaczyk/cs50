@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include <sys/stat.h> 
+#include <sys/stat.h>
 #include <errno.h>
 
 typedef uint8_t BYTE;
@@ -10,7 +10,7 @@ typedef uint8_t BYTE;
 int main(int argc, char *argv[])
 {
 
-    char *sourceFile = argv[1]; 
+    char *sourceFile = argv[1];
     char *pch;
 
     // check does program was correctly initiated
@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
         printf("The parameter must be a .raw file format\n");
         return 2;
     }
-    else if((pch=strstr(argv[1],"./")) == NULL )
-    {
-        printf("You need to specify a path leding to a .raw file\n");
-        return 3;
-    }
+    // else if((pch=strstr(argv[1],"./")) == NULL )
+    // {
+    //     printf("You need to specify a path leding to a .raw file\n");
+    //     return 3;
+    // }
 
     // open raw file
     FILE *inPointer = fopen(argv[1], "r");
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
     // declare needed variables
     BYTE buffer[512];
-    int imageNumber = 1;
+    int imageNumber = 0;
     char intToString[10];
     char nameOfAfile[128];
     char nameConcat1[] = {"./images/image-"};
@@ -52,13 +52,13 @@ int main(int argc, char *argv[])
     BYTE isJpeg = 0;
     BYTE compare[3] = { 255, 216, 255};
     FILE *image;
-    
+
     while (fread(buffer, 512,1,inPointer) == 1)
     {
 
         // check is it start of a new jpeg
         if(buffer[0] == 255)
-        {   
+        {
             isNewJpeg++;
             for(int i = 1; i < 3; i++)
             {
@@ -73,18 +73,18 @@ int main(int argc, char *argv[])
                 {
                     isNewJpeg++;
                     break;
-                } 
+                }
             }
             if (isNewJpeg != 4)
             {
                 isNewJpeg = 0;
-            }            
+            }
         }
 
         // create jpeg file if was found
         if (isNewJpeg == 4)
         {
-            sprintf(nameOfAfile,"./images/image-%i.jpg",imageNumber);
+            sprintf(nameOfAfile,"./images/%03i.jpg",imageNumber);
             image = fopen(nameOfAfile, "w");
             if (image == NULL)
             {
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
                         // if found last two closing bytes write down and cloase a file
                         if (buffer[i] == 0xD9 && buffer[i-1] == 0xFF)
                         {
-                            fwrite(buffer, i+1, 1, image);
+                            fwrite(buffer, 512, 1, image);
                             printf("%s has been recovered\n", nameOfAfile);
                             isJpeg = 0;
                             fclose(image);
@@ -121,9 +121,9 @@ int main(int argc, char *argv[])
                             fwrite(buffer, 512, 1, image);
                             break;
                         }
-                    
+
                     }
-                    
+
                 }
             }
             // if there is no ending sign just write down buffer
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
             {
                 fwrite(buffer, 512, 1, image);
             }
-            
+
         }
 
 
