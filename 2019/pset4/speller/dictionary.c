@@ -134,7 +134,31 @@ bool check(const char *word)
         {
             index = 26;
         }
-        
+        if (trie->children[index] && word[i+1])
+        {
+            trie = trie->children[index];
+        }
+        else if (!trie->children[index])
+        {
+            printf("too long word\n");
+            return false;
+        }
+        else if (!word[i+1])
+        {
+            if (trie->children[index]->is_word == true)
+            {
+                return true;
+            }
+            else
+            {
+                printf("too short word\n");
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        } 
     }
     return false;
 }
