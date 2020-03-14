@@ -24,9 +24,8 @@ node;
 
 // Represents a trie
 node *root;
-
 // Number of words in a dictionary
-int dictNrOfWords = 0;
+unsigned int dictNrOfWords = 0;
 
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
@@ -68,13 +67,13 @@ bool load(const char *dictionary)
 
         for (int i = 0; word[i] != '\0'; i++)
         {
-        printf("node number: %i, letter: %c\n", nodeNumber, word[i]);
+        // printf("node number: %i, letter: %c\n", nodeNumber, word[i]);
         nodeNumber++;
             if ((index = tolower(word[i]) % 97) == 39)
             {
                 index = 26;
             }
-            printf("index: %i\n", index);
+            // printf("index: %i\n", index);
             if (!trie->children[index])
             {
                 trie->children[index] = malloc(sizeof(node));
@@ -93,18 +92,18 @@ bool load(const char *dictionary)
             if (trie->children[index])
             {
             trie = trie->children[index];
-            printf("memory: %0lx\n", (uintptr_t) trie->children[index]);
+            // printf("memory: %0lx\n", (uintptr_t) trie->children[index]);
             }
             if (word[i+1] == '\0')
             {
                 trie->is_word = true;
             }
-            if (word[i+1] == '\0')
-            {
-            printf("end of a word\n");
-            }
+            // if (word[i+1] == '\0')
+            // {
+            // printf("end of a word\n");
+            // }
         }
-        printf("\n\n\n");
+        // printf("\n\n\n");
     }
 
     // Close dictionary
@@ -118,7 +117,6 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
     return dictNrOfWords;
 }
 
@@ -127,7 +125,6 @@ bool check(const char *word)
 {
     node *trie = root;
     int index = 0;
-    // TODO
     for (int i = 0; word[i] != '\0'; i++)
     {
         if ((index = tolower(word[i]) % 97) == 39)
@@ -140,7 +137,7 @@ bool check(const char *word)
         }
         else if (!trie->children[index])
         {
-            printf("too long word\n");
+            // printf("too long word\n");
             return false;
         }
         else if (!word[i+1])
@@ -151,7 +148,7 @@ bool check(const char *word)
             }
             else
             {
-                printf("too short word\n");
+                // printf("too short word\n");
                 return false;
             }
         }
@@ -163,9 +160,24 @@ bool check(const char *word)
     return false;
 }
 
+void freeTrie(node *arg)
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (arg->children[i])
+        {
+            freeTrie(arg->children[i]);
+        }
+    }
+    free(arg);
+    
+}
+
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    // TODO
-    return false;
+    freeTrie(root);
+    return true;
 }
+
+
