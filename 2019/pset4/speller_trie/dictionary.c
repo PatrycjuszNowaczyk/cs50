@@ -179,5 +179,3 @@ bool unload(void)
     freeTrie(root);
     return true;
 }
-
-
