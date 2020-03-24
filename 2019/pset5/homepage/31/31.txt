@@ -1,0 +1,13 @@
+zadanie 30
+
+1. start 03.03
+2. html/css/js (w tym jquery), bez bootstrapa i innych frameworków, w³asny grid dozwolony.
+3. rwd obowiazkowo 
+4. mile widziane fajne efekty. 
+5. cyferki w sekcji przed kontaktem maj¹ "odliczaæ", a paski ze skillami maj¹ byæ animowane, tzn. ³adowaæ siê przy scrollowaniu 
+(mam nadziejê, ¿e wiadomo, o co chodzi :))
+6. przydatne pojêcia: jquery viewportchecker, jquery count, animated progressbar
+7. fajna stronka: http://littlesnippets.net/
+
+
+
