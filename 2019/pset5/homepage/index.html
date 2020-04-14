@@ -25,6 +25,9 @@
         <dov class="row"></dov>
     </div>
     <header class="row no-gutters">
+        <!-- // FIXME
+        --navbar disappears after click 
+        -->
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <div class="row">
@@ -216,14 +219,19 @@
                 </div>
             </div>
         </div>
+        <!-- // FIXME 
+        // fix images resizing -->
         <div class="container my-5">
             <div class="row">
                 <h1 class="heading col-12">My recent works</h1>
                 <div class="container">
-                    <div class="row">
+                    <div class="row myRecentWork">
                         <div class="col-sm-6 col-md-4 p-0 myRecentWorkBox">
-                            <img src="img/myRecentWork/skull_pix.jpg" alt="" class="myRecentWorkImg">
-                            <img src="img/myRecentWork/skull.jpg" alt="" class="myRecentWorkImg show">
+                            <div class="myRecentWorkBox-img">
+                                <img src="img/myRecentWork/skull_pix.jpg" alt="" class="myRecentWorkImg">
+                                <img src="img/myRecentWork/skull.jpg" alt="" class="myRecentWorkImg show">
+                                <div class="myRecentWorkInfo"></div>
+                            </div>
                         </div>
                         <div class="col-sm-6 col-md-4 p-0 myRecentWorkBox">
                             <img src="img/myRecentWork/face_pix.jpg" alt="" class="myRecentWorkImg">
@@ -239,7 +247,8 @@
         </div>
     </main>
     <footer>
-
+        <!-- // TODO 
+        //create footer -->
     </footer>
     <!-- java script -->
     <script type="text/javascript" src="script.js"></script>

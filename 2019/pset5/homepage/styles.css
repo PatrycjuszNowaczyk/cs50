@@ -388,11 +388,17 @@
         height: 8rem;
     }
     
+    .myRecentWork {
+        border-top: 40px solid black;
+        border-left: 40px solid black;
+    }
+    
     .myRecentWorkBox {
         position: relative;
-        min-height: 40rem;
         overflow: hidden;
-        /* border: #000 1rem solid; */
+        background-color: #000;
+        border-right: 40px solid black;
+        border-bottom: 40px solid black;
     }
     
     .myRecentWorkImg {
@@ -401,14 +407,17 @@
         left: 50%;
         transform: translate(-50%, -50%);
         transition: all 0.2s ease-in-out;
+        object-fit: cover;
     }
-
-    .show{
+    
+    .show {
         opacity: 0;
     }
-    .myRecentWorkBox:hover .show{
+    
+    .myRecentWorkBox:hover .show {
         opacity: 1;
     }
+    
     img.wide {
         width: auto;
         height: 100%;
