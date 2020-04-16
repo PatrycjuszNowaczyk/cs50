@@ -128,10 +128,6 @@
         background-color: rgba(255, 255, 255, 1);
     }
     
-    .navbar-collapse.collapse {
-        padding-top: 7px;
-    }
-    
     .navbar-nav {
         background-color: rgba(255, 255, 255, 1);
     }
@@ -419,7 +415,7 @@
         top: 100%;
         left: 40%;
         text-decoration: none;
-        color: #000;
+        color: #fff;
         transform: translateY(0%);
         z-index: 1;
     }
@@ -446,6 +442,7 @@
     
     .myRecentWorkInfoSource:hover {
         color: rgb(255, 255, 255);
+        text-shadow: royalblue 2px 2px;
         text-shadow: 0px 0px 10px #000000;
     }
     
@@ -457,7 +454,7 @@
     .myRecentWorkInfoSource {
         position: absolute;
         text-decoration: none;
-        color: #000;
+        color: #fff;
     }
     
     .myRecentWorkInfo {
@@ -468,7 +465,7 @@
         height: 25%;
         border: 10px solid #eee;
         transform: translate(150%, calc(300% + 10px));
-        background-color: rgba(255, 255, 255, 0.4);
+        background-color: rgba(0, 0, 0, 0.65);
         transition: all 0.2s ease-in-out;
     }
     
@@ -477,11 +474,11 @@
         transition: all 0.2s ease-in-out 0.25s;
     }
     
-    .show {
+    .hide {
         opacity: 0;
     }
     
-    .myRecentWorkBox:hover .show {
+    .myRecentWorkBox:hover .hide {
         opacity: 1;
     }
     
