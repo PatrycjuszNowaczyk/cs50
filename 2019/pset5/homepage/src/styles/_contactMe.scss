@@ -1,0 +1,76 @@
+@mixin contactMeBase {
+    border: 4px solid black;
+    width: 100%;
+    padding: 15px;
+    outline: 15px solid rgba(0, 0, 0, 0);
+    outline-offset: 0px;
+    transition: all 0.25s ease-in-out;
+    text-align: justify;
+    line-height: 1.5em;
+    // min-height: 18px;
+    &:focus {
+        outline: 15px solid rgba(255, 255, 0, 1);
+        &::placeholder{
+            opacity: 0;
+        }
+    }
+    &::placeholder{
+        color: color(grey);
+        opacity: 1;
+        transition: all 0.2s ease-in-out;
+    }
+}
+
+@mixin contactMeElementBGbase {
+    width: 100%;
+    height: calc(100% + 30px);
+    position: absolute;
+    background: color(yellow);
+    left: 0;
+    top: -15px;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+}
+
+.contactMeNameBG {
+    @include contactMeElementBGbase();
+    border-top-left-radius: 25px;
+}
+
+#contactMeName {
+    @include contactMeBase();
+    border-top-left-radius: 15px;
+    outline: none;
+    &:focus {
+        outline: none;
+        &~.contactMeNameBG {
+            opacity: 1;
+        }
+    }
+}
+
+#contactMeMail {
+    @include contactMeBase();
+    min-height: 18px;
+}
+
+#contactMeMessage {
+    @include contactMeBase();
+    resize: none;
+    overflow: hidden;
+}
+
+#contactMeSubmit {
+    @include contactMeBase();
+    text-align: center;
+    background-color: color(white);
+    border-bottom-right-radius: 15px;
+    &:focus {
+        outline: none;
+        background-color: color(yellow);
+    }
+    &:hover {
+        background-color: color(green);
+    }
+}
