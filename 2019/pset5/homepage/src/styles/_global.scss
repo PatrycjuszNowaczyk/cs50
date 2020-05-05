@@ -10,7 +10,9 @@
 :root {
     font-size: 10px !important;
 }
-
+*:focus{
+    outline: 3px solid color(yellow);
+}
 button:focus {
     outline: none;
 }
@@ -23,6 +25,7 @@ button:focus {
 body {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
+    z-index: 0;
 }
 
 a:hover {

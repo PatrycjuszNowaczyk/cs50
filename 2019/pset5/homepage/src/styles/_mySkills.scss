@@ -1,0 +1,35 @@
+.mySkills {
+    margin-bottom: 4rem;
+    &__tag {
+        &>p {
+            margin-bottom: 0.4rem;
+        }
+    }
+    &__box {
+        position: relative;
+        background-color: color(yellow);
+        height: 2rem;
+        border: 0.4rem #000 dashed;
+        margin-bottom: 3rem;
+    }
+}
+
+.mySkills__value {
+    position: absolute;
+    top: -0.4rem;
+    left: -0.4rem;
+    background-color: color(black);
+    height: calc(100% + 0.8rem);
+    &.w-30 {
+        width: calc(30% + 0.8rem);
+    }
+    &.w-50 {
+        width: calc(50% + 0.8rem) !important;
+    }
+    &.w-75 {
+        width: calc(75% + 0.8rem) !important;
+    }
+    &.w-100 {
+        width: calc(100% + 0.8rem) !important;
+    }
+}

@@ -6,12 +6,13 @@
 .myRecentWorkBox {
     position: relative;
     overflow: hidden;
-    background-color: #000;
-    border: 15px solid #fff;
+    border: 15px solid #000;
+    margin: 15px 0;
     &:hover {
         .myRecentWorkInfo {
-            transform: translate(0, 10px);
             transition: all 0.2s ease-in-out 0.25s;
+            transform: translateX(-50%) translateY(-15px);
+            opacity: 1;
         }
         .myRecentWorkInfoDemo {
             transform: translateY(0);
@@ -33,20 +34,21 @@
     align-items: center;
     justify-content: space-evenly;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    width: calc(100% - 30px);
     height: 4em;
-    border-top: 0.5em dashed color(white);
-    transform: translate(0, 100%);
+    border: 5px dashed #fff;
+    transform: translate(-50%, 100%);
     background-color: color(black);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
 }
 
 .myRecentWorkInfoDemo {
     position: relative;
     text-decoration: none;
     color: color(yellow);
-    transform: translateY(200%);
+    transform: translateY(500%);
     opacity: 0;
     z-index: 1;
     &:hover {
@@ -59,12 +61,12 @@
     position: relative;
     text-decoration: none;
     color: color(yellow);
-    transform: translateY(200%);
+    transform: translateY(500%);
     opacity: 0;
     z-index: 1;
     &:hover {
         color: color(black);
-        background: color(green);
+        background: color(yellow);
     }
 }
 
@@ -75,6 +77,10 @@
     transform: translate(-50%, -50%);
     transition: all 0.2s ease-in-out;
     object-fit: cover;
+}
+
+.myRecentWorkImg--yellow {
+    filter: invert(75%) sepia(100%) hue-rotate(21deg) saturate(4);
 }
 
 .hide {

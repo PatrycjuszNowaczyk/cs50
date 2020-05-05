@@ -4,6 +4,12 @@
     
     @import "variablesAndFunctions";
     @import "global";
+    @import "bootstrapClasses";
+    // @import 'pageBackground';
+    @import "navbar";
+    @import "content";
+    @import 'aboutMe';
+    @import 'mySkills';
     @import "myRecentWork";
     @import "contactMe";
 
@@ -17,7 +23,7 @@
     .header__white {
         position: relative;
         min-height: 500px;
-        background-image: url('img/smoke.png');
+        background-image: url('../img/smoke.png');
         background-repeat: no-repeat;
         background-position: left 50% top 23px;
         background-size: contain;
@@ -28,7 +34,7 @@
         position: relative;
         background-color: #fff;
         min-height: 500px;
-        background-image: url('img/smoke2.png');
+        background-image: url('../img/smoke2.png');
         background-repeat: no-repeat;
         background-position: 37px 351px;
         background-size: 196px;
@@ -71,238 +77,9 @@
         top: 52%;
         left: 75%;
     }
-    /* navbar settings */
+
     
-    .navbar {
-        position: fixed;
-        z-index: 1;
-        width: 100%;
-    }
     
-    nav>.container>.row {
-        justify-content: space-between;
-        width: 100%;
-        margin: 0;
-    }
-    
-    nav .nav-link {
-        text-align: center;
-    }
-    
-    nav .collapse {
-        justify-content: flex-end;
-    }
-    
-    nav button {
-        border: 0px;
-    }
-    
-    nav button:focus {
-        outline: none;
-    }
-    
-    .navbar-light p.navbar-brand {
-        font-size: 1.7rem;
-        padding-top: 8px;
-        padding-bottom: 0px;
-        margin: 0;
-        background-color: rgba(255, 255, 255, 1);
-    }
-    
-    .navbar-nav {
-        background-color: rgba(255, 255, 255, 1);
-    }
-    
-    .navbar-nav a:after {
-        background: none repeat scroll 0 0 transparent;
-        bottom: 0;
-        content: "";
-        display: block;
-        height: 5px;
-        left: 50%;
-        position: absolute;
-        background: #000;
-        transition: width 0.3s ease 0s, left 0.3s ease 0s;
-        width: 0;
-    }
-    
-    .navbar-nav a:hover:after {
-        width: 100%;
-        left: 0;
-    }
-    
-    .navbar-light .navbar-toggler {
-        border: 0;
-        position: relative;
-        padding: 0;
-    }
-    
-    .navbar-light .navbar-nav .nav-link {
-        position: relative;
-    }
-    
-    .burger {
-        position: relative;
-        width: 40px;
-        height: 40px;
-        top: 0px;
-        left: 0px;
-        -webkit-transition-duration: 0.5s;
-        transition-duration: 0.5s;
-        background-color: #fff;
-    }
-    
-    .burger.open {
-        @nest &>.navbar {
-            background-color: #fff;
-        }
-    }
-    
-    .burger .icon {
-        -webkit-transition-duration: 0.5s;
-        transition-duration: 0.5s;
-        position: absolute;
-        height: 40px;
-        width: 40px;
-        -webkit-transform: rotateZ(0deg);
-        transform: rotateZ(0deg);
-        -webkit-transform-origin: 20px 20px;
-        transform-origin: 20px 20px;
-        top: 0px;
-        left: 0px;
-    }
-    
-    .burger .icon:before {
-        -webkit-transition-duration: 0.5s;
-        transition-duration: 0.5s;
-        position: absolute;
-        width: 40px;
-        height: 5px;
-        background-color: #212121;
-        content: "";
-        top: 10px;
-        left: 0px;
-    }
-    
-    .burger .icon:after {
-        -webkit-transition-duration: 0.5s;
-        transition-duration: 0.5s;
-        position: absolute;
-        width: 40px;
-        height: 5px;
-        background-color: #212121;
-        content: "";
-        top: 25px;
-        left: 0px;
-    }
-    
-    .burger.open .icon {
-        -webkit-transition: all 0.5s;
-        transition: all 0.5s;
-        -webkit-transform: rotateZ(360deg);
-        transform: rotateZ(360deg);
-    }
-    
-    .burger.open .icon:before {
-        width: 30px;
-    }
-    
-    .burger.open .icon:after {
-        -webkit-transform-origin: 40px 20px;
-        transform-origin: 40px 20px;
-        -webkit-transform: scaleX(0.75);
-        transform: scaleX(0.75);
-    }
-    /* content */
-    
-    .content {
-        display: flex;
-        display: -webkit-flex;
-        position: relative;
-        min-height: 0;
-        padding: 2rem 0 2rem 0;
-        margin: 0 0 auto 0;
-        min-height: calc(100vh - 600px);
-    }
-    
-    .content__background .row {
-        width: 100%;
-    }
-    
-    .content__background {
-        display: flex;
-        align-items: stretch;
-        position: absolute;
-        top: 0;
-        left: 0;
-        min-height: 100%;
-        min-width: 100%;
-        overflow: hidden;
-        z-index: -1;
-    }
-    
-    .content__background .content__left {
-        overflow: hidden;
-    }
-    
-    .content__background .content__right {
-        overflow: hidden;
-    }
-    
-    .content__background .content__left .square {
-        width: 100%;
-        top: -15px;
-        left: 75%;
-        height: 100%;
-        z-index: -1;
-    }
-    
-    .content__background .content__right .square {
-        width: calc(100% + 20px);
-        top: 0px;
-        left: -10px;
-        height: calc(100% - 15px);
-        z-index: -1;
-    }
-    
-    .skill {
-        margin-bottom: 4rem;
-    }
-    
-    .skillTag>p {
-        margin-bottom: 0.4rem;
-    }
-    
-    .skillBox {
-        position: relative;
-        background-color: #f1f1f1;
-        height: 2rem;
-        border: 0.4rem #000 dashed;
-    }
-    
-    .skillValue {
-        position: absolute;
-        top: -0.4rem;
-        left: -0.4rem;
-        background-color: #000;
-        height: calc(100% + 0.8rem);
-    }
-    
-    .skillValue.w-30 {
-        width: calc(30% + 0.8rem);
-    }
-    
-    .skillValue.w-50 {
-        width: calc(50% + 0.8rem) !important;
-    }
-    
-    .skillValue.w-75 {
-        width: calc(75% + 0.8rem) !important;
-    }
-    
-    .skillValue.w-100 {
-        width: calc(100% + 0.8rem) !important;
-    }
     /* content's elements */
     
     .heading {
@@ -337,7 +114,7 @@
     .whatIdoBackground {
         position: relative;
         padding-top: 16rem !important;
-        background-image: url(img/matrixBg.png);
+        background-image: url('../img/matrixBg.png');
         background-position: top center;
         background-repeat: repeat-x;
         z-index: -1;
@@ -376,51 +153,6 @@
     }
     /* overwrite bootstrap 4 */
     
-    .btn-dark {
-        position: relative;
-        display: flex;
-        padding: 1.5rem 2rem 1.5rem 2rem;
-        background-color: #fff;
-        transition: all 0.5s ease-in;
-        margin-top: 3rem;
-        margin-bottom: 3rem;
-        min-width: 18rem;
-        justify-content: center;
-    }
-    
-    .btn-dark:hover {
-        background-color: #000;
-    }
-    
-    .btn-dark::before {
-        content: '';
-        position: absolute;
-        width: 0%;
-        height: 0%;
-        transform-origin: center center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        transition: all 0.2s ease-in;
-        pointer-events: none;
-    }
-    
-    .btn-dark:hover.btn-dark::before {
-        height: 100%;
-        width: 100%;
-        background-color: #000;
-    }
-    
-    .btn-dark>span {
-        color: #000;
-        transition: all 0.2s ease-in;
-        z-index: 0;
-    }
-    
-    .btn-dark:hover>span {
-        color: #fff;
-    }
     
     @media all and (min-width: 2560px) {
          :root {
@@ -585,28 +317,6 @@
     }
     /* settings for media queries */
     
-    @media all and (min-width: 992px) {
-        nav {
-            font-size: 1.2rem;
-        }
-        nav>.container>.row {
-            padding-top: 10px;
-        }
-    }
-    
-    @media all and (max-width: 991px) {
-        .navbar-light .navbar-brand {
-            font-size: 1.6rem;
-        }
-        .navbar {
-            background-color: #fff;
-        }
-        nav {
-            font-size: 4rem;
-            background-color: #ffffff;
-        }
-    }
-    
     @media all and (max-width: 767px) {
         .header__white {
             background-image: url('img/smoke.png');
@@ -625,13 +335,6 @@
     @media all and (max-width: 575px) {
          :root {
             font-size: 2.5vw;
-        }
-        .navbar-light p.navbar-brand {
-            width: 100%;
-            text-align: center;
-        }
-        .navbar-light .navbar-toggler {
-            margin: 0 2.2vw 0 auto;
         }
         .heading {
             font-size: 8vw;

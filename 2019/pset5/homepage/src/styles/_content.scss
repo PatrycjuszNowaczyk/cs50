@@ -1,0 +1,50 @@
+.content {
+    display: flex;
+    display: -webkit-flex;
+    position: relative;
+    min-height: 0;
+    padding: 2rem 0 2rem 0;
+    margin: 0 0 auto 0;
+    min-height: calc(100vh - 600px);
+    z-index: 0;
+}
+
+.content__background .row {
+    width: 100%;
+}
+
+.content__background {
+    display: flex;
+    align-items: stretch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.content__background .content__left {
+    overflow: hidden;
+}
+
+.content__background .content__right {
+    overflow: hidden;
+}
+
+.content__background .content__left .square {
+    width: 100%;
+    top: -15px;
+    left: 75%;
+    height: 100%;
+    z-index: -1;
+}
+
+.content__background .content__right .square {
+    width: calc(100% + 20px);
+    top: 0px;
+    left: -10px;
+    height: calc(100% - 15px);
+    z-index: -1;
+}

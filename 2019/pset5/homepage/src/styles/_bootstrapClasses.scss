@@ -1,0 +1,49 @@
+// test classes
+.text-center {
+    text-align: center !important;
+}
+
+.text-justify {
+    text-align: justify !important;
+}
+
+// button classes
+// TODO 
+// tidy the code
+.btn-dark {
+    position: relative;
+    display: flex;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    background-color: transparent;
+    transition: all 0.5s ease-in;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    min-width: 18rem;
+    border: 3px solid color(black);
+    padding: 15px 30px;
+    justify-content: center;
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform-origin: center center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0, 0);
+        background-color: #fff;
+        transition: all 0.2s ease-in;
+        pointer-events: none;
+        z-index: -1;
+    }
+    &:hover {
+        // background-color: color(yellow);
+        &::before {
+            background-color: color(yellow);
+            transform: translate(-50%, -50%) scale(1, 1);
+        }
+        &>span {
+            color: color(black);
+        }
+    }
+}
