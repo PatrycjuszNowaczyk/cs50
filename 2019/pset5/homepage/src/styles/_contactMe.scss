@@ -2,51 +2,43 @@
     border: 4px solid black;
     width: 100%;
     padding: 15px;
-    outline: 15px solid rgba(0, 0, 0, 0);
-    outline-offset: 0px;
     transition: all 0.25s ease-in-out;
     text-align: justify;
     line-height: 1.5em;
     // min-height: 18px;
     &:focus {
-        outline: 15px solid rgba(255, 255, 0, 1);
-        &::placeholder{
+        box-shadow: 0 0 0 15px #ff0;
+        outline: none;
+        &::placeholder {
             opacity: 0;
         }
+        &.good {
+            box-shadow: 0 0 0 15px #0f0;
+            border-color: #0f0;
+        }
+        &.bad {
+            box-shadow: 0 0 0 15px #f00;
+            border-color: #f00;
+        }
     }
-    &::placeholder{
+    &::placeholder {
         color: color(grey);
         opacity: 1;
         transition: all 0.2s ease-in-out;
     }
-}
-
-@mixin contactMeElementBGbase {
-    width: 100%;
-    height: calc(100% + 30px);
-    position: absolute;
-    background: color(yellow);
-    left: 0;
-    top: -15px;
-    z-index: -1;
-    opacity: 0;
-    transition: all 0.25s ease-in-out;
-}
-
-.contactMeNameBG {
-    @include contactMeElementBGbase();
-    border-top-left-radius: 25px;
+    &.good {
+        border-color: #0f0;
+    }
+    &.bad {
+        border-color: #f00;
+    }
 }
 
 #contactMeName {
     @include contactMeBase();
     border-top-left-radius: 15px;
-    outline: none;
     &:focus {
         outline: none;
-        &~.contactMeNameBG {
-            opacity: 1;
-        }
     }
 }
 
@@ -67,7 +59,8 @@
     background-color: color(white);
     border-bottom-right-radius: 15px;
     &:focus {
-        outline: none;
+        outline: none !important;
+        box-shadow: noned;
         background-color: color(yellow);
     }
     &:hover {

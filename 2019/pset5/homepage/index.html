@@ -49,16 +49,16 @@
                                     <a class="navbar__link" href="#">Home</a>
                                 </li>
                                 <li class="navbar__item">
-                                    <a class="navbar__link" href="#">About</a>
+                                    <a class="navbar__link" href="#aboutMe">About</a>
                                 </li>
                                 <li class="navbar__item">
-                                    <a class="navbar__link" href="#">Service</a>
+                                    <a class="navbar__link" href="#whatIdo">Service</a>
                                 </li>
                                 <li class="navbar__item">
-                                    <a class="navbar__link" href="#">Portfolio</a>
+                                    <a class="navbar__link" href="#myRecentWork">Portfolio</a>
                                 </li>
                                 <li class="navbar__item">
-                                    <a class="navbar__link" href="#">Contact</a>
+                                    <a class="navbar__link" href="#contactMe">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -248,7 +248,8 @@
                             <div class="row myRecentWork">
                                 <div class="col-sm-6 col-md-4">
                                     <div class="myRecentWorkBox">
-                                        <img src="img/myRecentWork/skull_pix.jpg" alt="" class="myRecentWorkImg myRecentWorkImg--yellow">
+                                        <img src="img/myRecentWork/skull_pix.jpg" alt=""
+                                            class="myRecentWorkImg myRecentWorkImg--yellow">
                                         <img src="img/myRecentWork/skull.jpg" alt="" class="myRecentWorkImg hide">
                                         <div class="myRecentWorkInfo">
                                             <a href="#" class="myRecentWorkInfoDemo">DemO</a>
@@ -259,7 +260,8 @@
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="myRecentWorkBox">
-                                        <img src="img/myRecentWork/face_pix.jpg" alt="" class="myRecentWorkImg myRecentWorkImg--yellow">
+                                        <img src="img/myRecentWork/face_pix.jpg" alt=""
+                                            class="myRecentWorkImg myRecentWorkImg--yellow">
                                         <img src="img/myRecentWork/face.jpg" alt="" class="myRecentWorkImg hide">
                                         <div class="myRecentWorkInfo">
                                             <a href="#" class="myRecentWorkInfoDemo">DemO</a>
@@ -270,7 +272,8 @@
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="myRecentWorkBox">
-                                        <img src="img/myRecentWork/circles_pix.jpg" alt="" class="myRecentWorkImg myRecentWorkImg--yellow">
+                                        <img src="img/myRecentWork/circles_pix.jpg" alt=""
+                                            class="myRecentWorkImg myRecentWorkImg--yellow">
                                         <img src="img/myRecentWork/circles.jpg" alt="" class="myRecentWorkImg hide">
                                         <div class="myRecentWorkInfo">
                                             <a href="#" class="myRecentWorkInfoDemo">DemO</a>
@@ -295,11 +298,10 @@
                         <div class="container">
                             <!--TODO 
                     create validation in vanilla JS-->
-                            <form action="#" class="row contactMe" method="POST">
+                            <form action="#" onsubmit="validSubmit(event);" class="row contactMe">
                                 <div class="col-sm-5 my-3">
                                     <input id="contactMeName" type="text" name="name" placeholder="name"
                                         autocomplete="off">
-                                    <div class="contactMeNameBG"></div>
                                 </div>
                                 <div class="col-sm-7 my-3">
                                     <input id="contactMeMail" type="text" name="mail" placeholder="e-mail"
